@@ -12,6 +12,11 @@ const GraphView: FC<Props> = () => {
     const [loading, setLoading] = useState(false);
     const [sigmaSettings, setSigmaSettings] = useState<any>(null);
 
+    const getColors = (r: number, b: number, g: number) => {
+        let sum = r + g + b;
+        return `rgb(${(r / sum) * 255},${(b / sum) * 255},${(g / sum) * 255})`;
+    };
+
     const loadGexfToSigma = async () => {
         setLoading(true);
         const sigmaGraph = new UndirectedGraph();
@@ -22,13 +27,15 @@ const GraphView: FC<Props> = () => {
         const graphObj = parse(Graph, final);
 
         graphObj.forEachNode((key: any, attrs: any) => {
-            console.log(attrs);
+            let nodeColor = getColors(attrs?.netflix_count, attrs?.amazon_count, attrs?.disney_count);
+            // console.log(attrs);
+            // console.log(nodeColor);
             sigmaGraph.addNode(key, {
                 x: attrs.x,
                 y: attrs.y,
                 label: attrs.label,
-                size: attrs.size / 10,
-                color: attrs?.color,
+                size: attrs?.netflix_count + attrs?.amazon_count + attrs?.disney_count,
+                color: nodeColor,
             });
         });
 
