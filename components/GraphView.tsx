@@ -28,7 +28,7 @@ const GraphView: FC<Props> = () => {
                 y: attrs.y,
                 label: attrs.label,
                 size: attrs.size / 10,
-                color: attrs.color,
+                color: attrs?.color,
             });
         });
 
