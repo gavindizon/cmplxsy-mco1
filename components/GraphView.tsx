@@ -14,7 +14,15 @@ const GraphView: FC<Props> = () => {
 
     const getColors = (r: number, b: number, g: number) => {
         let sum = r + g + b;
-        return `rgb(${(r / sum) * 255},${(b / sum) * 255},${(g / sum) * 255})`;
+
+        return `rgb(${Math.round((r / sum) * 255)},${Math.round((g / sum) * 255)},${Math.round((b / sum) * 255)})`;
+    };
+
+    const getColorsForEdges = (r: number, b: number, g: number) => {
+        let sum = r + g + b;
+        return `rgba(${Math.round((r / sum) * 255)},${Math.round((g / sum) * 255)},${Math.round(
+            (b / sum) * 255
+        )}, 0.1)`;
     };
 
     const loadGexfToSigma = async () => {
@@ -30,6 +38,11 @@ const GraphView: FC<Props> = () => {
             let nodeColor = getColors(attrs?.netflix_count, attrs?.amazon_count, attrs?.disney_count);
             // console.log(attrs);
             // console.log(nodeColor);
+            // if (attrs.label === "David Attenborough") {
+            //     console.log(attrs);
+            //     console.log(nodeColor);
+            // }
+
             sigmaGraph.addNode(key, {
                 x: attrs.x,
                 y: attrs.y,
@@ -40,6 +53,14 @@ const GraphView: FC<Props> = () => {
         });
 
         graphObj.forEachUndirectedEdge((key: any, attrs: any, source: any, target: any, sourceAttrs: any) => {
+            //console.log(sourceAttrs);
+
+            let newCol = getColorsForEdges(
+                sourceAttrs?.netflix_count,
+                sourceAttrs?.amazon_count,
+                sourceAttrs?.disney_count
+            );
+
             // const colorVals = sourceAttrs.color.slice(4, -1);
 
             // const newCol = `rgba(${colorVals}, 0.1)`;
@@ -47,7 +68,7 @@ const GraphView: FC<Props> = () => {
             sigmaGraph.addEdgeWithKey(key, source, target, {
                 weight: attrs.weight / 10,
                 size: 0.1,
-                // color: newCol,
+                color: newCol,
                 width: 1,
             });
         });
