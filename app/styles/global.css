@@ -1,3 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .sigma-container {
     height: 90vh;
+}
+
+.react-sigma-search input {
+    @apply bg-gray-900 text-white px-2 py-1;
 }
