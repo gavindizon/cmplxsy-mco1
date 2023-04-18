@@ -17,7 +17,7 @@ export default function Modularity() {
                     Statistical Inference
                 </a>
             </div>
-            <CustomGraphView filename={"movies_net.gexf"} customClass="modularity_class" />
+            <CustomGraphView filename={"movies_net_1.gexf"} customClass="modularity_class" />
         </div>
     );
 }

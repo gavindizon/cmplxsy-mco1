@@ -17,7 +17,7 @@ export default function Index() {
                     Statistical Inference
                 </a>
             </div>
-            <GraphView filename={"movies_net.gexf"} />
+            <GraphView filename={"movies_net_1.gexf"} />
         </div>
     );
 }

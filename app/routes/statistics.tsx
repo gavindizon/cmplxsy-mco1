@@ -18,7 +18,7 @@ export default function Modularity() {
                 </a>
             </div>
 
-            <CustomGraphView filename={"movies_net.gexf"} customClass="stat_inf_class" />
+            <CustomGraphView filename={"movies_net_1.gexf"} customClass="stat_inf_class" />
         </div>
     );
 }
