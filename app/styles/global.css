@@ -7,5 +7,5 @@
 }
 
 .react-sigma-search input {
-    @apply bg-gray-900 text-white px-2 py-1;
+    @apply bg-gray-900 text-white px-2 py-1 w-full;
 }
