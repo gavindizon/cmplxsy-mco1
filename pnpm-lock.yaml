@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@react-sigma/core': ^3.1.0
+  '@react-sigma/layout-forceatlas2': ^3.4.0
   '@remix-run/dev': ^1.14.3
   '@remix-run/eslint-config': ^1.14.3
   '@remix-run/node': ^1.14.3
@@ -15,6 +16,7 @@ specifiers:
   graphology: ^0.25.1
   graphology-gexf: ^0.10.3
   graphology-layout-force: ^0.2.4
+  graphology-layout-forceatlas2: ^0.10.1
   isbot: ^3.6.5
   raw-loader: ^4.0.2
   react: ^18.2.0
@@ -27,6 +29,7 @@ specifiers:
 
 dependencies:
   '@react-sigma/core': 3.1.0_afiwt32vmvht5c2fqthhxlkxt4
+  '@react-sigma/layout-forceatlas2': 3.4.0_2oce4rceqna6nsjin2hapiv35i
   '@remix-run/node': 1.14.3
   '@remix-run/react': 1.14.3_biqbaboplfbrettd7655fr4n2y
   '@remix-run/vercel': 1.14.3_@vercel+node@2.10.0
@@ -34,6 +37,7 @@ dependencies:
   graphology: 0.25.1_graphology-types@0.24.7
   graphology-gexf: 0.10.3_graphology-types@0.24.7
   graphology-layout-force: 0.2.4_graphology-types@0.24.7
+  graphology-layout-forceatlas2: 0.10.1_graphology-types@0.24.7
   isbot: 3.6.7
   raw-loader: 4.0.2_webpack@5.76.3
   react: 18.2.0
@@ -1919,6 +1923,45 @@ packages:
       lodash: 4.17.21
       react: 18.2.0
       sigma: 2.4.0_graphology-types@0.24.7
+    dev: false
+
+  /@react-sigma/core/3.4.0_afiwt32vmvht5c2fqthhxlkxt4:
+    resolution: {integrity: sha512-IfP3tMqYHgdrTG4Pc3xqAb8xqwScMjQfhAfLt1yGNiBPaFuunxGOmDEZ8Q6/DQMqkkTksxq4C30W3C7aRC42Tg==}
+    peerDependencies:
+      graphology: ^0.25.1
+      lodash: ^4.17.21
+      react: ^17.0.0 || ^18.0.0
+      sigma: ^2.4.0
+    dependencies:
+      graphology: 0.25.1_graphology-types@0.24.7
+      lodash: 4.17.21
+      react: 18.2.0
+      sigma: 2.4.0_graphology-types@0.24.7
+    dev: false
+
+  /@react-sigma/layout-core/3.4.0_afiwt32vmvht5c2fqthhxlkxt4:
+    resolution: {integrity: sha512-SgBHf3ftCZ38bmXXitnOXu5nazSX+4XiZbcFs9XUH+G0xwQYlIO4NZI2YFjkMav2dPOcU/sVghdnMpBn+jorwQ==}
+    dependencies:
+      '@react-sigma/core': 3.4.0_afiwt32vmvht5c2fqthhxlkxt4
+    transitivePeerDependencies:
+      - graphology
+      - lodash
+      - react
+      - sigma
+    dev: false
+
+  /@react-sigma/layout-forceatlas2/3.4.0_2oce4rceqna6nsjin2hapiv35i:
+    resolution: {integrity: sha512-Dgq9WLN6fXsIwMAfCYQZ2daF8x9ovqLHJq80SS9eq7oYBfmEqbeYnG6EOIpAEcVQmj8FGcbfWy8/1crUsn79ZQ==}
+    peerDependencies:
+      graphology-layout-forceatlas2: ^0.10.1
+    dependencies:
+      '@react-sigma/layout-core': 3.4.0_afiwt32vmvht5c2fqthhxlkxt4
+      graphology-layout-forceatlas2: 0.10.1_graphology-types@0.24.7
+    transitivePeerDependencies:
+      - graphology
+      - lodash
+      - react
+      - sigma
     dev: false
 
   /@remix-run/dev/1.14.3_qzyg2kdhtwdzofs34yu56vg2im:
@@ -4955,6 +4998,15 @@ packages:
 
   /graphology-layout-force/0.2.4_graphology-types@0.24.7:
     resolution: {integrity: sha512-NYZz0YAnDkn5pkm30cvB0IScFoWGtbzJMrqaiH070dYlYJiag12Oc89dbVfaMaVR/w8DMIKxn/ix9Bqj+Umm9Q==}
+    peerDependencies:
+      graphology-types: '>=0.19.0'
+    dependencies:
+      graphology-types: 0.24.7
+      graphology-utils: 2.5.2_graphology-types@0.24.7
+    dev: false
+
+  /graphology-layout-forceatlas2/0.10.1_graphology-types@0.24.7:
+    resolution: {integrity: sha512-ogzBeF1FvWzjkikrIFwxhlZXvD2+wlY54lqhsrWprcdPjopM2J9HoMweUmIgwaTvY4bUYVimpSsOdvDv1gPRFQ==}
     peerDependencies:
       graphology-types: '>=0.19.0'
     dependencies:

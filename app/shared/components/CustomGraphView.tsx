@@ -1,37 +1,36 @@
 import React, { FC, useEffect, useState } from "react";
 import Graph from "graphology";
+import GraphEvents from "./GraphEvents";
 // @ts-ignore
 import { parse } from "graphology-gexf";
 import { UndirectedGraph } from "graphology";
-import GraphEvents from "./GraphEvents";
 import { SigmaContainer } from "@react-sigma/core";
+import deterministicRandomness from "../utils/deterministicRandomness";
 
-type Props = { filename: string };
-
-type GraphEventProps = {};
+type Props = { filename: string; customClass: string };
 
 const colors: any = {};
 
-const GraphView: FC<Props> = ({ filename = "movies_net.gexf" }) => {
+const CustomGraphView: FC<Props> = ({ filename = "movies_net.gexf", customClass = "modularity_class" }) => {
     const [graph, setGraph] = useState<any>(null);
     const [sigmaSettings, setSigmaSettings] = useState<any>(null);
     const [loading, setLoading] = useState(true);
 
-    const getColors = (r: number, g: number, b: number) => {
-        let sum = r + g + b;
+    const getColors = (attrs: any, customClass: string, isEdge = false) => {
+        if (attrs[customClass] in colors) {
+            let obtainedColor = colors[attrs[customClass]].split(",");
+            obtainedColor[3] = `${isEdge ? 0 : 1})`;
+            return obtainedColor.join(",");
+        }
 
-        let newColor = `rgba(${Math.round((r / sum) * 255)},${Math.round((g / sum) * 255)},${Math.round(
-            (b / sum) * 255
-        )}, 1)`;
+        let r = Math.random();
+        let g = Math.random();
+        let b = Math.random();
 
-        colors[newColor] = newColor;
+        let newColor = `rgba(${Math.round(r * 255)},${Math.round(g * 255)},${Math.round(b * 255)}, ${isEdge ? 0 : 1})`;
 
+        colors[attrs[customClass]] = newColor;
         return newColor;
-    };
-
-    const getColorsForEdges = (r: number, g: number, b: number) => {
-        let sum = r + g + b;
-        return `rgba(${Math.round((r / sum) * 255)},${Math.round((g / sum) * 255)},${Math.round((b / sum) * 255)}, 0)`;
     };
 
     const loadGexfToSigma = async () => {
@@ -42,9 +41,8 @@ const GraphView: FC<Props> = ({ filename = "movies_net.gexf" }) => {
         const final = await rawGraph.text();
 
         const graphObj = parse(Graph, final);
-
         graphObj.forEachNode(async (key: string, attrs: any) => {
-            let nodeColor = getColors(attrs?.netflix_count, attrs?.amazon_count, attrs?.disney_count);
+            let nodeColor = getColors(attrs, customClass);
             sigmaGraph.addNode(key, {
                 x: attrs.x,
                 y: attrs.y,
@@ -58,11 +56,7 @@ const GraphView: FC<Props> = ({ filename = "movies_net.gexf" }) => {
         });
 
         graphObj.forEachUndirectedEdge(async (key: any, attrs: any, source: any, target: any, sourceAttrs: any) => {
-            let newCol = getColorsForEdges(
-                sourceAttrs?.netflix_count,
-                sourceAttrs?.amazon_count,
-                sourceAttrs?.disney_count
-            );
+            let newCol = getColors(sourceAttrs, customClass, true);
 
             sigmaGraph.addEdgeWithKey(key, source, target, {
                 weight: attrs.weight / 10,
@@ -126,4 +120,4 @@ const GraphView: FC<Props> = ({ filename = "movies_net.gexf" }) => {
     );
 };
 
-export default GraphView;
+export default CustomGraphView;
