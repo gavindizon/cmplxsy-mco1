@@ -40,6 +40,7 @@ const GraphView: FC<Props> = ({ filename = "movies_net.gexf" }) => {
 
         const rawGraph: any = await fetch(`./resource/${filename}`);
         const final = await rawGraph.text();
+        console.log(final);
 
         const graphObj = parse(Graph, final);
 
